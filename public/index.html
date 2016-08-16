@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app='bfing-app'>
+
+<head>
+    <meta charset="utf-8">
+    <title>WIC Breastfeeding Support</title>
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="assets/styles/styles.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="assets/styles/home.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="assets/styles/reset.css" media="screen" title="no title" charset="utf-8">
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="main-header">
+      <ul class="menu">
+        <li class="menu-item" ui-sref="home"><img src="assets/images/WIC_logo.png" class="logo"/></li>
+        <li class="menu-item" ui-sref="sign-in">Sign-In</li>
+        <li class="menu-item" ui-sref="resources">Resources</li>
+        <li class="menu-item" ui-sref="chat">Chat</li>
+      </ul>
+
+      <div class="profile">
+        <div class="welcome">
+          <p class='welcome-text'>Welcome, NAME </p>
+          <img src="assets/images/profile.png" class="profile-pic" />
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-container">
+      <section class="views">
+        <ui-view></ui-view>
+      </section>
+    </main>
+
+    <div class="footer">
+
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+    <script src='./app/app.module.js'></script>
+    <script src='./app/app.routes.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+.main-header {
+  background-color: #6452BF;
+  height: 8vh;
+  font-family: 'Karla', sans-serif;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  -moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+	-webkit-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+	box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+}
+
+.menu {
+  height: 12px;
+  margin-left: 10px;
+  color: #FFF5EE;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.menu-item {
+  margin: 5px;
+  cursor: pointer;
+}
+
+.logo {
+  height: 7vh;
+  color: #FFF5EE;
+  cursor: pointer;
+}
+
+.profile {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 5;
+}
+
+.profile-pic {
+  height: 4vh;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.welcome {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.welcome-text {
+  color: #FFF5EE;
+}
+
+html {
+  background-color: #43377F;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 87vh;
+
+}
+
+.views {
+  width: 80vw;
+  height: 80vh;
+  border-radius: 5px;
+  background-color: #FFF5EE;
+  padding: 20px;
+  font-family: 'Karla', sans-serif;
+  -moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.3);
+	-webkit-box-shadow: 5px 5px 5px rgba(68,68,68,0.3);
+	box-shadow: 5px 5px 5px rgba(68,68,68,0.3);
+}
+
+.footer {
+  height: 5vh;
+  background-color: #6452BF;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  -moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+	-webkit-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+	box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+}
+/*#866EFF*/
