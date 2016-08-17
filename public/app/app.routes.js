@@ -12,7 +12,12 @@ angular.module('bfing-app')
       .state('chat', {
         url: '/chat',
         templateUrl: 'app/component/chat/chat.html',
-        // controller: 'chatController'
+        resolve: {
+          user: function(mainService) {
+            return mainService.getUser();
+          }
+        },
+        controller: 'chatController'
       })
       .state('resources', {
         url: '/resources',
@@ -20,9 +25,9 @@ angular.module('bfing-app')
         // controller: 'resourcesController'
       })
       .state('sign-in', {
-        url: '/signIn',
+        url: '/sign-in',
         templateUrl: 'app/component/sign-in/sign-in.html',
-        // controller: 'signInController'
+        controller: 'publicController'
       })
       .state('register', {
         url: '/register',

@@ -2,6 +2,7 @@
   background-color: #6452BF;
   height: 8vh;
   font-family: 'Karla', sans-serif;
+  font-size: 1.5rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -20,7 +21,7 @@
 }
 
 .menu-item {
-  margin: 5px;
+  margin: 10px;
   cursor: pointer;
 }
 
@@ -32,8 +33,8 @@
 
 .profile {
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 1.5rem;
+  top: 1.5rem;
   z-index: 5;
 }
 
