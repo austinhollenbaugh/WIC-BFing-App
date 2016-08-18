@@ -7,7 +7,14 @@ angular.module('bfing-app')
       .state('home', {
         url: '/',
         templateUrl: 'app/component/home/home.html',
-        // controller: 'homeController'
+        // controller: 'homeController',
+        resolve: {
+          isLoggedIn: function(mainService) {
+            return mainService.getUser().then(function(response) {
+              return response.data;
+            })
+          }
+        }
       })
       .state('chat', {
         url: '/chat',
@@ -19,6 +26,11 @@ angular.module('bfing-app')
         },
         controller: 'chatController'
       })
+      .state('recent-tips', {
+        url: '/recent-tips',
+        templateUrl: 'app/component/recent-tips/tip.html',
+        controller: 'tipController'
+      })
       .state('resources', {
         url: '/resources',
         templateUrl: 'app/component/resources/resources.html',
@@ -27,11 +39,16 @@ angular.module('bfing-app')
       .state('sign-in', {
         url: '/sign-in',
         templateUrl: 'app/component/sign-in/sign-in.html',
-        controller: 'publicController'
+        // controller: 'publicController'
       })
       .state('register', {
         url: '/register',
         templateUrl: 'app/component/register-new-account/register.html',
         // controller: 'registrationController'
+      })
+      .state('account', {
+        url: '/register',
+        templateUrl: 'app/component/userAccount/userAccount.html',
+        controller: 'accountController'
       });
   });

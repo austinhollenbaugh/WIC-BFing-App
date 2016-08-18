@@ -80,8 +80,6 @@ var checkAuth = function (req, res, next) {
 
 app.get('/me', checkAuth, controller.getUser);
 
-app.get('/name', controller.getName);
-
 // app.get('/sign-in', function (req, res) {
 //   res.redirect('/#/sign-in');
 // });

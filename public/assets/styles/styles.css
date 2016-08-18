@@ -11,7 +11,11 @@
 	box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
 }
 
-.menu {
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.left-menu {
   height: 12px;
   margin-left: 10px;
   color: #FFF5EE;
@@ -31,11 +35,12 @@
   cursor: pointer;
 }
 
-.profile {
+.right-menu {
   position: absolute;
   right: 1.5rem;
-  top: 1.5rem;
+  top: 1.1rem;
   z-index: 5;
+  color: #FFF5EE;
 }
 
 .profile-pic {

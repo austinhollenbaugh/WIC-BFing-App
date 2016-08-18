@@ -9,33 +9,38 @@
     <link rel="stylesheet" href="assets/styles/styles.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="assets/styles/home.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="assets/styles/reset.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="assets/styles/tips.css" media="screen" title="no title" charset="utf-8">
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
 </head>
 
-<body ng-controller="publicController">
+<body ng-controller="publicController" class='ng-cloak'>
 
     <nav class="main-header">
-      <ul class="menu">
-        <li class="menu-item" ui-sref="home"><img src="assets/images/WIC_logo.png" class="logo"/></li>
-        <li class="menu-item" ui-sref="sign-in">Sign-In</li>
-        <li class="menu-item" ui-sref="resources">Resources</li>
-        <li class="menu-item" ui-sref="chat">Chat</li>
-      </ul>
+        <ul class="left-menu">
+            <li class="menu-item" ui-sref="home"><img src="assets/images/WIC_logo.png" class="logo" /></li>
+            <li class="menu-item" ui-sref="resources">Resources</li>
+            <li class="menu-item" ui-sref="chat">Chat</li>
+            <li class="menu-item" ui-sref="recent-tips">Tips</li>
+        </ul>
 
-      <div class="profile">
-        <div class="welcome">
-          <p class='welcome-text'>Welcome, {{ user.displayName }} </p>
-          <img ng-src="https://graph.facebook.com/{{user.id}}/picture?type=large" class="profile-pic" />
+        <div class="right-menu">
+            <div class="sign-in" ng-show="!isLoggedIn">
+                <div class="menu-item" ui-sref="sign-in">Sign-In</div>
+            </div>
+            <div class="welcome" ng-show="isLoggedIn">
+                <!-- <p class='welcome-text'>Welcome, {{ user.displayName }}</p> -->
+                <img ui-sref="account" ng-src="https://graph.facebook.com/{{user.id}}/picture?type=large" class="profile-pic" />
+            </div>
         </div>
-      </div>
     </nav>
 
     <main class="main-container">
-      <section class="views">
-        <ui-view></ui-view>
-      </section>
+        <section class="views">
+            <ui-view></ui-view>
+        </section>
     </main>
+
 
     <div class="footer">
 
@@ -48,7 +53,12 @@
     <script src='./app/app.routes.js'></script>
     <script src='./app/publicController.js'></script>
     <script src='./app/component/chat/chatController.js'></script>
+    <script src='./app/component/home/homeController.js'></script>
+    <script src='./app/component/userAccount/accountController.js'></script>
+    <script src='./app/component/recent-tips/tipController.js'></script>
+    <script src='./app/component/recent-tips/tipService.js'></script>
     <script src='./app/mainService.js'></script>
+    <script src='./app/component/recent-tips/tipDirective.js'></script>
 </body>
 
 </html>

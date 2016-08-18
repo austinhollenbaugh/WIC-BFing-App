@@ -1,0 +1,21 @@
+.tips-list {
+  width: 100%;
+  height: 100%;
+}
+
+.tip {
+  height: 10%;
+  background-color: lightgrey;
+  padding: 1rem;
+  border: 1px solid black;
+  margin: 5px;
+}
+
+.tip:hover {
+  background-color: grey;
+}
+
+.tip-text {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
