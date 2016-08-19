@@ -28,9 +28,13 @@
             <div class="sign-in" ng-show="!isLoggedIn">
                 <div class="menu-item" ui-sref="sign-in">Sign-In</div>
             </div>
-            <div class="welcome" ng-show="isLoggedIn">
+            <div class="welcome dropdown" ng-show="isLoggedIn">
                 <!-- <p class='welcome-text'>Welcome, {{ user.displayName }}</p> -->
-                <img ui-sref="account" ng-src="https://graph.facebook.com/{{user.id}}/picture?type=large" class="profile-pic" />
+                <img ng-src="https://graph.facebook.com/{{user.id}}/picture?type=large" class="profile-pic dropbtn" />
+                <div class="dropdown-content">
+                  <a class="dd-menu-item" ui-sref="account">Account</a>
+                  <a class="dd-menu-item" href="#">Log-Out</a>
+                </div>
             </div>
         </div>
     </nav>
