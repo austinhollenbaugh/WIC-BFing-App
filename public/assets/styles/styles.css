@@ -18,7 +18,7 @@
 .left-menu {
   height: 12px;
   margin-left: 10px;
-  color: #FFF5EE;
+  color: #FEFEFA;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -29,9 +29,12 @@
   cursor: pointer;
 }
 
+/*.hamburger-menu {
+  display: none;
+}*/
+
 .logo {
   height: 7vh;
-  color: #FFF5EE;
   cursor: pointer;
 }
 
@@ -40,7 +43,7 @@
   right: 1.5rem;
   top: 1.1rem;
   z-index: 5;
-  color: #FFF5EE;
+  color: #FEFEFA;
 }
 
 .profile-pic {
@@ -56,7 +59,7 @@
 }
 
 .welcome-text {
-  color: #FFF5EE;
+  color: #FEFEFA;
 }
 
 html {
@@ -75,7 +78,7 @@ html {
   width: 80vw;
   height: 80vh;
   border-radius: 5px;
-  background-color: #FFF5EE;
+  background-color: #FEFEFA;
   padding: 20px;
   font-family: 'Karla', sans-serif;
   -moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.3);
@@ -94,6 +97,10 @@ html {
   -moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
 	-webkit-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
 	box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+}
+
+.warmline-mobile {
+  display: none;
 }
 
 /*DROP DOWN MENUS*/
@@ -145,13 +152,42 @@ html {
 
 /*MOBILE RESPONSIVE*/
 
-@media (min-width: 768px) {
+@media only screen and (max-device-width: 768px) {
+  .main-container {
+    background-color: #FEFEFA;
+  }
+
   .main-header {
     height: 10vh;
+    justify-content: center;
+
+  }
+
+  .ham {
+    cursor: pointer;
+  }
+
+  .hamburger-menu {
+    width: 35px;
+    height: 5px;
+    background-color: #FEFEFA;
+    margin: 6px 0;
+  }
+
+  .logo {
+    height: 10vh;
+  }
+
+  .non-logo {
+    display: none;
   }
 
   .profile-pic {
     height: 7vh;
+  }
+
+  .sign-in {
+    display: none;
   }
 
   .views {
@@ -162,5 +198,16 @@ html {
 
   .footer {
     height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+
+  .warmline-mobile {
+    display: block;
+    color: white;
+    font-size: 2.5rem;
+    font-family: 'Karla', sans-serif;
+  }
+
 }

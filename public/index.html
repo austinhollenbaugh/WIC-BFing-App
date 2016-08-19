@@ -17,12 +17,22 @@
 <body ng-controller="publicController" class='ng-cloak'>
 
     <nav class="main-header">
+
+      <div class="ham" ui-sref="menu">
+        <div class="hamburger-menu"></div>
+        <div class="hamburger-menu"></div>
+        <div class="hamburger-menu"></div>
+      </div>
+
         <ul class="left-menu">
-            <li class="menu-item" ui-sref="home"><img src="assets/images/WIC_logo.png" class="logo" /></li>
-            <li class="menu-item" ui-sref="resources">Resources</li>
-            <li class="menu-item" ui-sref="chat">Chat</li>
-            <li class="menu-item" ui-sref="recent-tips">Tips</li>
+            <li class="menu-item logo" ui-sref="home">
+              <img class="logo" src="assets/images/WIC_logo.png"/></li>
+            <li class="menu-item non-logo" ui-sref="resources">Resources</li>
+            <li class="menu-item non-logo" ui-sref="chat">Chat</li>
+            <li class="menu-item non-logo" ui-sref="recent-tips">Tips</li>
         </ul>
+
+
 
         <div class="right-menu">
             <div class="sign-in" ng-show="!isLoggedIn">
@@ -47,7 +57,7 @@
 
 
     <div class="footer">
-
+      <p class="warmline-mobile">Breastfeeding Warmline: 801-331-5988</p>
     </div>
 
 

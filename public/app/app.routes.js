@@ -50,5 +50,9 @@ angular.module('bfing-app')
         url: '/register',
         templateUrl: 'app/component/userAccount/userAccount.html',
         controller: 'accountController'
+      })
+      .state('menu', {
+        url: '/menu',
+        templateUrl: 'app/component/mobileMenu/menu.html'
       });
   });

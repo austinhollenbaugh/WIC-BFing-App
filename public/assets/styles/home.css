@@ -24,3 +24,17 @@
   font-weight: 800;
   font-size: 30px;
 }
+
+@media only screen and (max-device-width: 768px) {
+  .title-text {
+    font-size: 4rem;
+    text-align: left;
+  }
+  .wic-provides {
+    font-size: 3rem;
+    text-align: left;
+  }
+  .warmline {
+    display: none;
+  }
+}
