@@ -7,11 +7,10 @@
 
     <!-- STYLES -->
     <link rel="stylesheet" href="assets/styles/styles.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="assets/styles/home.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="assets/styles/reset.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="assets/styles/tips.css" media="screen" title="no title" charset="utf-8">
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="lib/angular-clear-input/angular.dcb-clear-input.min.js"/> -->
 </head>
 
 <body ng-controller="publicController" class='ng-cloak'>
@@ -26,7 +25,7 @@
 
         <ul class="left-menu">
             <li class="menu-item logo" ui-sref="home">
-              <img class="logo" src="assets/images/WIC_logo.png"/></li>
+              <img class="logo" src="assets/images/WIC_logo-2.png"/></li>
             <li class="menu-item non-logo" ui-sref="resources">Resources</li>
             <li class="menu-item non-logo" ui-sref="chat">Chat</li>
             <li class="menu-item non-logo" ui-sref="recent-tips">Tips</li>
@@ -43,7 +42,7 @@
                 <img ng-src="https://graph.facebook.com/{{user.id}}/picture?type=large" class="profile-pic dropbtn" />
                 <div class="dropdown-content">
                   <a class="dd-menu-item" ui-sref="account">Account</a>
-                  <a class="dd-menu-item" href="#">Log-Out</a>
+                  <a class="dd-menu-item" href="/logout" ng-click="isLoggedIn=false">Log-Out</a>
                 </div>
             </div>
         </div>
@@ -63,16 +62,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
-    <script src='./app/app.module.js'></script>
-    <script src='./app/app.routes.js'></script>
-    <script src='./app/publicController.js'></script>
-    <script src='./app/component/chat/chatController.js'></script>
-    <script src='./app/component/home/homeController.js'></script>
-    <script src='./app/component/userAccount/accountController.js'></script>
-    <script src='./app/component/recent-tips/tipController.js'></script>
-    <script src='./app/component/recent-tips/tipService.js'></script>
-    <script src='./app/mainService.js'></script>
-    <script src='./app/component/recent-tips/tipDirective.js'></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <!-- <script src="stylesheet" href="lib/angular-clear-input/angular.dcb-clear-input.min.js"/></script> -->
+    <script src='bundle.js'></script>
+
+
 </body>
 
 </html>

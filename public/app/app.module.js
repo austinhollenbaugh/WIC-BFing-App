@@ -1,1 +1,2 @@
-angular.module('bfing-app', ['ui.router']);
+angular.module('bfing-app', ['ui.router'])
+  .constant('socket', io());

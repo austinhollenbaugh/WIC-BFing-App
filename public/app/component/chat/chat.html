@@ -1,19 +1,12 @@
-<body>
-    <ul id="messages"></ul>
+<main class="chat-view">
+  <ul id="messages" ng-repeat="message in messages track by $index" class="" >{{ message }}</ul>
+
+  <div class="messaging-container">
+
+
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input class="chat-input" id="m" autocomplete="off" ng-model="msg" clear-input/><button class="sendbtn" ng-click="sendMessage(msg)">Send</button>
     </form>
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-    var socket = io();
-    $('form').submit(function(){
-      socket.emit('chat message', $('#m').val());
-      $('#m').val('');
-      return false;
-    });
-    socket.on('chat message', function(msg){
-      $('#messages').append($('<li>').text(msg));
-    });
-  </script>
-</body>
+
+  </div>
+</main>
