@@ -18,12 +18,13 @@ angular.module('bfing-app')
     // })
 
     $scope.$on("send:message", function(ev, message) {
-      socket.emit("homerun", message);
+      socket.emit("send:message", message);
       console.log("service", message);
     });
 
     socket.on('grand slam', function(msg) {
       $scope.$broadcast("grand slam", msg);
+      console.log("service return", msg);
     });
 
     mainService.getUser().then(function(response) {

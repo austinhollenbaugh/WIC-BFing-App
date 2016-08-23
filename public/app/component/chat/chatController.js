@@ -36,8 +36,9 @@ angular.module('bfing-app')
           // }
 
         $scope.$on("grand slam", function(ev, message) {
-            console.log(message);
+            console.log('chatController ', message);
             $scope.messages.push(message);
+            $scope.$apply();
         });
 
     });

@@ -116,22 +116,21 @@ app.get('/', function (req, res) {
   console.log('hit')
 });
 
-// var socket = io();
-
 io.on('connection', function(socket){
   console.log('a user connected');
-
+  socket.join('some room');
   socket.on('disconnect', function(){
+    socket.leave('some room');
     console.log('user disconnected');
+  });
+
+  socket.on('send:message', function(msg){
+    console.log('message: ' + msg);
+    socket.broadcast.to('some room').emit('grand slam', msg);
+    console.log('room joined');
   });
 });
 
-io.on('connection', function(socket){
-socket.on('chat message', function(msg){
-  console.log(msg);
-  io.emit('chat message', msg);
-});
-});
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
