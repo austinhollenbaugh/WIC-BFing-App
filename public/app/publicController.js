@@ -17,6 +17,16 @@ angular.module('bfing-app')
     //   $scope.users.push(data.name);
     // })
 
+    $scope.$on("next patient", function(ev, pcID) {
+      socket.emit("next patient", pcID);
+      console.log('publicController', 'PC:', pcID);
+    })
+
+    socket.on("join room", function(pcID, user, roomID) {
+      $scope.$broadcast("join room", pcID, user, roomID);
+      console.log('publicCtrl', roomID);
+    })
+
     $scope.$on("send:message", function(ev, message) {
       socket.emit("send:message", message);
       console.log("service", message);

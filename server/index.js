@@ -116,7 +116,14 @@ app.get('/', function (req, res) {
   console.log('hit')
 });
 
+var users = [];
+
+var user = {};
+var roomID = null;
+var pcID = null;
+
 io.on('connection', function(socket){
+  console.log("Socket ID: ", socket.conn.id);
   console.log('a user connected');
   socket.join('some room');
   socket.on('disconnect', function(){
@@ -128,6 +135,13 @@ io.on('connection', function(socket){
     console.log('message: ' + msg);
     socket.broadcast.to('some room').emit('grand slam', msg);
     console.log('room joined');
+  });
+
+  socket.on("next patient", function(pcID) {
+    //create room
+    //send room id
+    socket.emit("join room", pcID, user, roomID);
+    console.log('sending room id');
   });
 });
 
