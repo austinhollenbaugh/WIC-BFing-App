@@ -1,5 +1,5 @@
 angular.module('bfing-app')
-  .controller('chatLandingController', function($scope) {
+  .controller('chatLandingController', function($scope, mainService) {
 
     $scope.joinChat = function(pcID) {
       $scope.$emit("next patient", pcID);

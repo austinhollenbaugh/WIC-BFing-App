@@ -14,7 +14,7 @@ var io = require('socket.io')(http);
 var keys = require('./keys');
 var controller = require('./controllers/serverController.js');
 require('./controllers/socketsController.js');
-var constring = 'postgres://austinhollenbaugh@localhost/practice';
+var constring = 'postgres://austinhollenbaugh@localhost/bfing_app';
 
 
 
@@ -42,8 +42,19 @@ passport.use(new FacebookStrategy({
     clientSecret: keys.facebookSecret,
     callbackURL: "/auth/facebook/callback"
   }, function(accessToken, refreshToken, profile, next) {
-    console.log('FB Profile: ', profile);
-    return next(null, profile);
+    // console.log('FB Profile: ', profile);
+    //db. query to check if user exists in database
+    db.users.findOne({facebook_id: profile.id}, function(err, dbRes) {
+      if (dbRes === undefined) {
+        console.log("User not found. Creating...");
+        db.users.insert({name: profile.displayName, type: 'client', facebook_id: profile.id} , function(err, dbRes) {
+          return next(null, dbRes);
+        });
+      } else {
+        console.log("Existing user found.");
+        return next(null, dbRes);
+      }
+    });
   }
 ));
 
@@ -113,7 +124,7 @@ app.get('/logout', function(req, res){
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
-  console.log('hit')
+  console.log('hit');
 });
 
 var users = [];
@@ -142,6 +153,7 @@ io.on('connection', function(socket){
     //send room id
     socket.emit("join room", pcID, user, roomID);
     console.log('sending room id');
+    console.log('pcID', arguments);
   });
 });
 
