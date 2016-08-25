@@ -10,4 +10,18 @@ angular.module('bfing-app')
         console.log('chatLandingCtrl', pcID);
     });
 
+    mainService.getUser().then(function(response) {
+      $scope.user = response.data.displayName;
+
+      $scope.id = response.data.id;
+
+      console.log(response.data);
+
+      if (response.data.err) {
+        $scope.isLoggedIn = false;
+      } else {
+        $scope.isLoggedIn = true;
+      }
+    });
+
   });

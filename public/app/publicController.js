@@ -7,12 +7,12 @@ angular.module('bfing-app')
     $scope.$on("next patient", function(ev, pcID) {
       console.log(ev);
       socket.emit("next patient", pcID);
-      console.log('publicController', 'PC:', pcID);
+      console.log('publicController', 'pcID:', pcID);
     });
 
-    socket.on("join room", function(pcID, user, roomID) {
-      $scope.$broadcast("join room", pcID, user, roomID);
-      console.log('publicCtrl', roomID);
+    socket.on("join room", function(pcID, clientID, roomID) {
+      $scope.$broadcast("join room", pcID, clientID, roomID);
+      console.log('publicCtrl', 'pcID:', pcID, 'clientID:', clientID, 'roomID:', roomID);
     });
 
     $scope.$on("send:message", function(ev, message) {

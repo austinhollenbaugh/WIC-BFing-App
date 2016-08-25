@@ -63,8 +63,17 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.googleSecret,
     callbackURL: "http://localhost:3000/auth/google/callback"
   }, function(accessToken, refreshToken, profile, next) {
-      console.log('Google Profile: ', profile);
-      return next(null, profile);
+    db.users.findOne({facebook_id: profile.id}, function(err, dbRes) {
+      if (dbRes === undefined) {
+        console.log("User not found. Creating...");
+        db.users.insert({name: profile.displayName, type: 'client', google_id: profile.id} , function(err, dbRes) {
+          return next(null, dbRes);
+        });
+      } else {
+        console.log("Existing user found.");
+        return next(null, dbRes);
+      }
+    });
   }
 ));
 
@@ -129,14 +138,11 @@ app.get('/', function (req, res) {
 
 var users = [];
 
-var user = {};
-var roomID = null;
-var pcID = null;
+var clientID = null;
 
 io.on('connection', function(socket){
   console.log("Socket ID: ", socket.conn.id);
   console.log('a user connected');
-  socket.join('some room');
   socket.on('disconnect', function(){
     socket.leave('some room');
     console.log('user disconnected');
@@ -149,11 +155,10 @@ io.on('connection', function(socket){
   });
 
   socket.on("next patient", function(pcID) {
-    //create room
-    //send room id
-    socket.emit("join room", pcID, user, roomID);
+    var roomID = controller.getRoomId();
+    console.log('uuid:', roomID);
+    socket.emit("join room", pcID, clientID, roomID);
     console.log('sending room id');
-    console.log('pcID', arguments);
   });
 });
 
