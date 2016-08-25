@@ -63,7 +63,7 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.googleSecret,
     callbackURL: "http://localhost:3000/auth/google/callback"
   }, function(accessToken, refreshToken, profile, next) {
-    db.users.findOne({facebook_id: profile.id}, function(err, dbRes) {
+    db.users.findOne({google_id: profile.id}, function(err, dbRes) {
       if (dbRes === undefined) {
         console.log("User not found. Creating...");
         db.users.insert({name: profile.displayName, type: 'client', google_id: profile.id} , function(err, dbRes) {
@@ -90,7 +90,7 @@ passport.deserializeUser(function(deserializedUser, done) {
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/',
+  successRedirect: '/#/chat',
   failureRedirect: '/'
 }));
 
@@ -100,7 +100,7 @@ app.get('/auth/google', passport.authenticate('google',{scope: ['https://www.goo
 
 app.get('/auth/google/callback',
     passport.authenticate( 'google', {
-        successRedirect: '/',
+        successRedirect: '/#/chat',
         failureRedirect: '/'
     }));
 
@@ -120,6 +120,8 @@ app.get('/test', function(req, res, next) {
 
 app.get('/me', checkAuth, controller.getUser);
 
+app.get('/joinChat', controller.joinChat);
+
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
@@ -136,29 +138,53 @@ app.get('/', function (req, res) {
   console.log('hit');
 });
 
-var users = [];
+var waitingUsers = [
+  //{user database id: socketId}
+];
 
 var clientID = null;
 
+//1. Make endpoint get current user id
+//2. User logs in, then calls endpoint ^
+//3. User connects websocket
+//4. Client emits their user id
+
 io.on('connection', function(socket){
-  console.log("Socket ID: ", socket.conn.id);
+  console.log("Socket Conn ID: ", socket.conn.id);
   console.log('a user connected');
   socket.on('disconnect', function(){
-    socket.leave('some room');
+    // socket.leave('some room');
     console.log('user disconnected');
   });
 
-  socket.on('send:message', function(msg){
+  //4b socket.on('registerUserId')
+  socket.on('addUserToQ', function(clientID) {
+    socket.emit('userAdded', clientID);
+    waitingUsers.push({clientID: socket.conn.id});
+    console.log(waitingUsers);
+  })
+
+  socket.on('send:message', function(msg, id, roomID){
     console.log('message: ' + msg);
-    socket.broadcast.to('some room').emit('grand slam', msg);
-    console.log('room joined');
+    socket.broadcast.to(roomID).emit('sendMessageBack', msg);
   });
 
   socket.on("next patient", function(pcID) {
+    if (waitingUsers.length === 0) {
+      socket.emit('empty queue')
+      console.log('empty queue')
+      return;
+    }
     var roomID = controller.getRoomId();
     console.log('uuid:', roomID);
-    socket.emit("join room", pcID, clientID, roomID);
-    console.log('sending room id');
+    var clientSocket = io.sockets.connected[waitingUsers[0].clientID];
+    console.log(waitingUsers);
+    var pcSocket = io.sockets.connected[pcId];
+    pcSocket.join(roomID);
+    clientSocket.join(roomID);
+
+    socket.emit("joined room", roomID);
+    console.log('PC:', pcID, '&', 'client:', clientID, 'joining room', roomID);
   });
 });
 

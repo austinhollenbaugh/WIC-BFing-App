@@ -26,10 +26,15 @@ angular.module('bfing-app')
         },
         controller: 'chatController'
       })
-      .state('chat-landing', {
-        url: '/chat-landing',
-        templateUrl: 'app/component/chat/chat-landing-page.html',
-        controller: 'chatLandingController'
+      .state('admin-chat-landing', {
+        url: '/admin-chat-landing',
+        templateUrl: 'app/component/chat/adminChat/admin-chat-landing.html',
+        controller: 'adminChatLandingCtrl'
+      })
+      .state('client-chat-landing', {
+        url: '/client-chat-landing',
+        templateUrl: 'app/component/chat/clientChat/client-chat-landing.html',
+        controller: 'clientChatLandingCtrl'
       })
       .state('recent-tips', {
         url: '/recent-tips',

@@ -3,6 +3,9 @@ module.exports = {
     console.log('hit');
     res.send(req.user);
   },
+  joinChat: function(clientID) {
+    waitingUsers.push({clientID: socket.conn.id});
+  },
   getRoomId: function() {
     var CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(''),
         random;

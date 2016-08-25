@@ -4,8 +4,16 @@ angular.module('bfing-app')
 
     $scope.isLoggedIn = true;
 
+    $scope.$on("addUserToQ", function(ev, clientID) {
+      socket.emit("addUserToQ", clientID);
+    });
+
+    socket.on('userAdded', function(clientID) {
+      $scope.$broadcast('userAdded', clientID);
+    });
+
     $scope.$on("next patient", function(ev, pcID) {
-      console.log(ev);
+      // console.log(ev);
       socket.emit("next patient", pcID);
       console.log('publicController', 'pcID:', pcID);
     });
@@ -14,9 +22,9 @@ angular.module('bfing-app')
       $scope.$broadcast("join room", pcID, clientID, roomID);
       console.log('publicCtrl', 'pcID:', pcID, 'clientID:', clientID, 'roomID:', roomID);
     });
-
+    // $scope.roomID
     $scope.$on("send:message", function(ev, message) {
-      socket.emit("send:message", message);
+      socket.to().emit("send:message", message);
       console.log("service", message);
     });
 
