@@ -139,7 +139,7 @@ app.get('/', function (req, res) {
 });
 
 var waitingUsers = [
-  //{user database id: socketId}
+  //{user socket: socket, clientId: clientID}
 ];
 
 var clientID = null;
@@ -160,9 +160,11 @@ io.on('connection', function(socket){
   //4b socket.on('registerUserId')
   socket.on('addUserToQ', function(clientID) {
     socket.emit('userAdded', clientID);
-    waitingUsers.push({clientID: socket.conn.id});
+    var clientObj = {clientID: clientID,
+      socket: socket};
+    waitingUsers.push(clientObj);
     console.log(waitingUsers);
-  })
+  });
 
   socket.on('send:message', function(msg, id, roomID){
     console.log('message: ' + msg);
@@ -170,21 +172,23 @@ io.on('connection', function(socket){
   });
 
   socket.on("next patient", function(pcID) {
+    console.log('server hit');
     if (waitingUsers.length === 0) {
-      socket.emit('empty queue')
-      console.log('empty queue')
+      socket.emit('empty queue');
+      console.log('empty queue');
       return;
     }
     var roomID = controller.getRoomId();
     console.log('uuid:', roomID);
-    var clientSocket = io.sockets.connected[waitingUsers[0].clientID];
-    console.log(waitingUsers);
-    var pcSocket = io.sockets.connected[pcId];
+    console.log(waitingUsers[0].clientID)
+    var clientSocket = waitingUsers[0].socket;
+    var pcSocket = socket;
     pcSocket.join(roomID);
     clientSocket.join(roomID);
-
+    var nextPatient = waitingUsers.shift();
+    console.log(waitingUsers);
     socket.emit("joined room", roomID);
-    console.log('PC:', pcID, '&', 'client:', clientID, 'joining room', roomID);
+    console.log('PC:', pcID, '&', 'client:', nextPatient.clientID, 'joining room', roomID);
   });
 });
 

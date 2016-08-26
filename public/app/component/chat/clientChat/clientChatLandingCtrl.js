@@ -8,11 +8,11 @@ angular.module('bfing-app')
 
     };
 
-    $scope.userJoinChat = 
+    $scope.userJoinChat =
 
     $scope.$on('userAdded', function(ev, clientID) {
       $scope.userQ.push(clientID);
-    })
+    });
 
     mainService.getUser().then(function(response) {
       $scope.user = response.data.displayName;

@@ -12,7 +12,7 @@ angular.module('bfing-app')
           isLoggedIn: function(mainService) {
             return mainService.getUser().then(function(response) {
               return response.data;
-            })
+            });
           }
         }
       })

@@ -36,7 +36,7 @@ angular.module('bfing-app')
             $scope.roomID = roomID;
         });
 
-        console.log($scope.roomID);
+        // console.log($scope.roomID);
 
         // $scope.clearInput = function() {
         //   $scope.msg = '';

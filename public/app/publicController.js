@@ -15,7 +15,7 @@ angular.module('bfing-app')
     $scope.$on("next patient", function(ev, pcID) {
       // console.log(ev);
       socket.emit("next patient", pcID);
-      console.log('publicController', 'pcID:', pcID);
+      console.log('hit publicController, ', 'pcID:', pcID);
     });
 
     socket.on("join room", function(pcID, clientID, roomID) {
