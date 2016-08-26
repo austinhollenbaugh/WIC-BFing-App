@@ -1,5 +1,5 @@
 angular.module('bfing-app')
-  .controller('publicController', ($scope, mainService, socket) => {
+  .controller('publicController', ($scope, mainService, $rootScope, socket) => {
     $scope.welcome = 'mainController is working';
 
     $scope.isLoggedIn = true;
@@ -18,9 +18,9 @@ angular.module('bfing-app')
       console.log('hit publicController, ', 'pcID:', pcID);
     });
 
-    socket.on("join room", function(pcID, clientID, roomID) {
-      $scope.$broadcast("join room", pcID, clientID, roomID);
-      console.log('publicCtrl', 'pcID:', pcID, 'clientID:', clientID, 'roomID:', roomID);
+    socket.on("joined room", function(roomID) {
+      $rootScope.$broadcast("joined room", roomID);
+      console.log('publicCtrl', 'roomID:', roomID);
     });
     // $scope.roomID
     $scope.$on("send:message", function(ev, message) {

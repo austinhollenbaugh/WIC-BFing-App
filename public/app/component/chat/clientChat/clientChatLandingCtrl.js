@@ -4,6 +4,7 @@ angular.module('bfing-app')
     $scope.userQ = [];
 
     $scope.addUserToQ = function(clientID) {
+      console.log('user added');
       $scope.$emit('addUserToQ', clientID);
 
     };

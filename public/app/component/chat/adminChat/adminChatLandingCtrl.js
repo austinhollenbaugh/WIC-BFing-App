@@ -1,5 +1,5 @@
 angular.module('bfing-app')
-  .controller('adminChatLandingCtrl', function($scope, mainService) {
+  .controller('adminChatLandingCtrl', function($scope, $state, mainService) {
 
     // if (user.data.err) {
     //     console.log('please sign in for admin access');
@@ -12,10 +12,9 @@ angular.module('bfing-app')
       $scope.$emit("next patient", pcID);
     };
 
-    $scope.$on("join room", function(ev, pcID, userID, roomID) {
-      //join roomid
-      var clientID = null;
-        console.log('adminChatLandingCtrl', 'pcID:', pcID, 'clientID:', clientID, 'roomID:', roomID);
+    $scope.$on("joined room", function(ev, roomID) {
+        $state.go('chat');
+        console.log('adminChatLandingCtrl',  'roomID:', roomID);
     });
 
     mainService.getUser().then(function(response) {

@@ -90,7 +90,7 @@ passport.deserializeUser(function(deserializedUser, done) {
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/#/chat',
+  successRedirect: '/',
   failureRedirect: '/'
 }));
 
@@ -100,7 +100,7 @@ app.get('/auth/google', passport.authenticate('google',{scope: ['https://www.goo
 
 app.get('/auth/google/callback',
     passport.authenticate( 'google', {
-        successRedirect: '/#/chat',
+        successRedirect: '/',
         failureRedirect: '/'
     }));
 

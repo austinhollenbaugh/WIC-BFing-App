@@ -3,10 +3,6 @@ angular.module('bfing-app')
         if (user.data.err) {
             console.log('please sign in to access chat')
             $state.go('sign-in');
-        } else if (user.data.type === "PC") {
-            $state.go('admin-chat-landing');
-        } else if (user.data.type === "client") {
-            $state.go('client-chat-landing');
         }
 
         // $scope.user = user.data;
@@ -20,7 +16,7 @@ angular.module('bfing-app')
 
         $scope.sendMessage = function(messageText, id, roomID) {
 
-            $scope.$emit('send:message', messageText, id, roomID);
+            $scope.to($scope.roomID).$emit('send:message', messageText, id, roomID);
 
             $scope.messages.push(messageText);
 
@@ -32,7 +28,9 @@ angular.module('bfing-app')
             $scope.message = '';
         };
 
-        $scope.$on("join room", function(ev, pcID, clientID, roomID) {
+        $scope.$on("joined room", function(ev, pcID, clientID, roomID) {
+          console.log('hit chat controller joined room')
+          console.log(arguments);
             $scope.roomID = roomID;
         });
 
