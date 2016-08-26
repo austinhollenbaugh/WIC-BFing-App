@@ -15,11 +15,9 @@ angular.module('bfing-app')
       });
     };
 
-    this.userJoinChat = function() {
-      return $http({
-        method: 'GET',
-        url: '/joinChat'
-      });
+    this.set = function(data) {
+      this.data = data;
+      console.log('data in service:', data);
     };
     //
     // this.isLoggedIn = function() {

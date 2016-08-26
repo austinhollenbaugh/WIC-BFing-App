@@ -120,8 +120,6 @@ app.get('/test', function(req, res, next) {
 
 app.get('/me', checkAuth, controller.getUser);
 
-app.get('/joinChat', controller.joinChat);
-
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
@@ -142,13 +140,6 @@ var waitingUsers = [
   //{user socket: socket, clientId: clientID}
 ];
 
-var clientID = null;
-
-//1. Make endpoint get current user id
-//2. User logs in, then calls endpoint ^
-//3. User connects websocket
-//4. Client emits their user id
-
 io.on('connection', function(socket){
   console.log("Socket Conn ID: ", socket.conn.id);
   console.log('a user connected');
@@ -166,9 +157,9 @@ io.on('connection', function(socket){
     console.log(waitingUsers);
   });
 
-  socket.on('send:message', function(msg, id, roomID){
+  socket.on('send:message', function(msg, id){
     console.log('message: ' + msg);
-    socket.broadcast.to(roomID).emit('sendMessageBack', msg);
+    socket.broadcast.to($rootScope.roomID).emit('sendMessageBack', msg, id);
   });
 
   socket.on("next patient", function(pcID) {
@@ -179,15 +170,24 @@ io.on('connection', function(socket){
       return;
     }
     var roomID = controller.getRoomId();
-    console.log('uuid:', roomID);
-    console.log(waitingUsers[0].clientID)
+    // console.log('uuid:', roomID);
+    // console.log(waitingUsers[0].clientID)
     var clientSocket = waitingUsers[0].socket;
     var pcSocket = socket;
+
+
     pcSocket.join(roomID);
     clientSocket.join(roomID);
+
+    // console.log("pc Socket", pcSocket.Adapter.rooms);
+    // console.log('client Socket', clientSocket.Adapter.rooms);
+
     var nextPatient = waitingUsers.shift();
+
     console.log(waitingUsers);
+
     socket.emit("joined room", roomID);
+
     console.log('PC:', pcID, '&', 'client:', nextPatient.clientID, 'joining room', roomID);
   });
 });

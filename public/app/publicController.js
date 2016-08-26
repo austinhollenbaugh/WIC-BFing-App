@@ -19,17 +19,24 @@ angular.module('bfing-app')
     });
 
     socket.on("joined room", function(roomID) {
-      $rootScope.$broadcast("joined room", roomID);
-      console.log('publicCtrl', 'roomID:', roomID);
+      // $rootScope.$broadcast("joined room", roomID);
+      // console.log('publicCtrl', 'roomID:', roomID);
+      console.log('roomID in pubCtrl:', roomID);
+      mainService.set(roomID);
+
+      // mainService.getRoomID(roomID).then(function(response) {
+      //   $scope.roomID = response;
+      // })
+
     });
-    // $scope.roomID
-    $scope.$on("send:message", function(ev, message) {
-      socket.to().emit("send:message", message);
+
+    $scope.$on("send:message", function(ev, message, id) {
+      socket.to($rootScope.roomID).emit("send:message", message);
       console.log("service", message);
     });
 
-    socket.on('grand slam', function(msg) {
-      $scope.$broadcast("grand slam", msg);
+    socket.on('sendMessageBack', function(msg, id) {
+      $scope.to($rootScope.roomID).$broadcast("sendMessageBack", msg, id);
       console.log("service return", msg);
     });
 

@@ -1,9 +1,9 @@
 angular.module('bfing-app')
-    .controller('chatController', function($scope, $state, mainService, user) {
-        if (user.data.err) {
-            console.log('please sign in to access chat')
-            $state.go('sign-in');
-        }
+    .controller('chatController', function($scope, $state, mainService, $rootScope, user) {
+        // if (user.data.err) {
+        //     console.log('please sign in to access chat')
+        //     $state.go('sign-in');
+        // }
 
         // $scope.user = user.data;
         // console.log(user, );
@@ -12,13 +12,16 @@ angular.module('bfing-app')
 
         $scope.messages = [];
 
+        $scope.getRoomID = mainService.set();
+        console.log('roomID on scope in chatController:', $scope.getRoomID);
 
 
-        $scope.sendMessage = function(messageText, id, roomID) {
 
-            $scope.to($scope.roomID).$emit('send:message', messageText, id, roomID);
+        $scope.sendMessage = function(messageText, id) {
 
-            $scope.messages.push(messageText);
+            // $scope.to($rootScope.roomID).$emit('send:message', messageText, id);
+
+            // $scope.messages.push(messageText);
 
             // $scope.messages.push({
             //     user: $scope.user,
@@ -28,10 +31,13 @@ angular.module('bfing-app')
             $scope.message = '';
         };
 
-        $scope.$on("joined room", function(ev, pcID, clientID, roomID) {
-          console.log('hit chat controller joined room')
+        // $scope.roomID = mainService.roomID;
+        // console.log('ROOM ID FROM SERVICE', $scope.roomID);
+
+        $rootScope.$on("joined room", function(ev, roomID) {
+          console.log('hit chat controller, joined room');
           console.log(arguments);
-            $scope.roomID = roomID;
+            $rootScope.roomID = roomID;
         });
 
         // console.log($scope.roomID);
@@ -40,7 +46,7 @@ angular.module('bfing-app')
         //   $scope.msg = '';
         // }
 
-        $scope.$on("sendMessageBack", function(ev, message) {
+        $scope.$on("sendMessageBack", function(ev, message, id) {
             console.log('chatController ', message);
             $scope.messages.push(message);
             $scope.$apply();

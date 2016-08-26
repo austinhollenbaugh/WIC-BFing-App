@@ -10,7 +10,9 @@ angular.module('bfing-app')
     $scope.getNextPatient = function(pcID) {
       console.log('hit adminChatLandingCtrl');
       $scope.$emit("next patient", pcID);
-    };
+    }();
+
+
 
     $scope.$on("joined room", function(ev, roomID) {
         $state.go('chat');
