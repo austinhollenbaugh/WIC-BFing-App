@@ -1,31 +1,40 @@
-.main-header {
-  background-color: #6452BF;
-  color: #5c5c5c;
-  height: 8vh;
-  font-family: 'Karla', sans-serif;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
+// .main-header {
+//   background-color: #6452BF;
+//   color: #5c5c5c;
+//   height: 8vh;
+//   font-family: 'Karla', sans-serif;
+//   font-size: 1.5rem;
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+// }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
-.left-menu {
-  height: 12px;
-  margin-left: 10px;
-  color: #FEFEFA;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+.nav-dir {
+  height: 15vh;
+  background-color: black;
+  // width: 100vw;
+  /* z-index: 10; */
+  display: block;
+  /* top: 0; */
 }
 
-.menu-item {
-  margin: 10px;
-  cursor: pointer;
-}
+// .left-menu {
+//   height: 12px;
+//   margin-left: 10px;
+//   color: #FEFEFA;
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-start;
+// }
+
+// .menu-item {
+//   margin: 10px;
+//   cursor: pointer;
+// }
 
 /*.hamburger-menu {
   display: none;
@@ -36,19 +45,19 @@
   cursor: pointer;
 }
 
-.right-menu {
-  position: absolute;
-  right: 1.5rem;
-  top: 1.1rem;
-  z-index: 5;
-  color: #FEFEFA;
-}
+// .right-menu {
+//   position: absolute;
+//   right: 1.5rem;
+//   top: 1.1rem;
+//   z-index: 5;
+//   color: #FEFEFA;
+// }
 
-.profile-pic {
-  height: 4vh;
-  cursor: pointer;
-  margin-left: 10px;
-}
+// .profile-pic {
+//   height: 4vh;
+//   cursor: pointer;
+//   margin-left: 10px;
+// }
 
 .welcome {
   /*display: flex;
