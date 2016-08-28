@@ -1,0 +1,24 @@
+<nav class="main-header">
+
+    <ul class="left-menu">
+        <li class="menu-item logo" ui-sref="home">
+          <img class="logo" src="assets/images/WIC_logo-2.png"/></li>
+        <li class="menu-item non-logo" ui-sref="resources">Resources</li>
+        <li class="menu-item non-logo" ui-sref="client-chat-landing">Chat</li>
+        <li class="menu-item non-logo" ui-sref="recent-tips">Tips</li>
+    </ul>
+
+    <div class="right-menu">
+        <div class="sign-in" ng-show="!isLoggedIn">
+            <div class="menu-item" ui-sref="sign-in">Sign-In</div>
+        </div>
+        <div class="welcome dropdown" ng-show="isLoggedIn">
+            <!-- <p class='welcome-text'>Welcome, {{ user.displayName }}</p> -->
+            <img ng-src="https://graph.facebook.com/{{user.id}}/picture?type=large" class="profile-pic dropbtn" />
+            <div class="dropdown-content">
+              <a class="dd-menu-item" ui-sref="account">Account</a>
+              <a class="dd-menu-item" href="/logout" ng-click="isLoggedIn=false">Log-Out</a>
+            </div>
+        </div>
+    </div>
+</nav>
