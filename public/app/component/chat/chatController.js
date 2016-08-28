@@ -1,69 +1,71 @@
 angular.module('bfing-app')
-    .controller('chatController', function($scope, $state, mainService, $rootScope, user) {
-        // if (user.data.err) {
-        //     console.log('please sign in to access chat')
-        //     $state.go('sign-in');
-        // }
+    .controller('chatController', function($scope, $state, mainService, $rootScope, user, $window) {
 
-        // $scope.user = user.data;
-        // console.log(user, );
+      $scope.serviceRoomID = mainService.set();
 
-        // $scope.name = user.data.displayName;
+      $scope.roomID = $window.localStorage.roomID;
 
-        $scope.messages = [];
+      $scope.messages = [];
 
-        $scope.getRoomID = mainService.set();
-        console.log('roomID on scope in chatController:', $scope.getRoomID);
+      $scope.sendMessage = function(msg, userID, roomID) {
+        $scope.$emit('send:message', msg, userID, roomID);
 
+          // $scope.message = '';
+      };
 
+      $scope.$on("sendMessageBack", function(ev, msg, userID) {
+          $scope.messages.push(msg);
+          $scope.$apply();
+      });
 
-        $scope.sendMessage = function(messageText, id) {
+      mainService.getUser().then(function(response) {
+        $scope.user = response.data.displayName;
 
-            // $scope.to($rootScope.roomID).$emit('send:message', messageText, id);
+        $scope.id = response.data.id;
 
-            // $scope.messages.push(messageText);
+        console.log(response.data);
 
-            // $scope.messages.push({
-            //     user: $scope.user,
-            //     text: $scope.message
-            // });
-
-            $scope.message = '';
-        };
-
-        // $scope.roomID = mainService.roomID;
-        // console.log('ROOM ID FROM SERVICE', $scope.roomID);
-
-        $rootScope.$on("joined room", function(ev, roomID) {
-          console.log('hit chat controller, joined room');
-          console.log(arguments);
-            $rootScope.roomID = roomID;
-        });
-
-        // console.log($scope.roomID);
-
-        // $scope.clearInput = function() {
-        //   $scope.msg = '';
-        // }
-
-        $scope.$on("sendMessageBack", function(ev, message, id) {
-            console.log('chatController ', message);
-            $scope.messages.push(message);
-            $scope.$apply();
-        });
-
-        mainService.getUser().then(function(response) {
-          $scope.user = response.data.displayName;
-
-          $scope.id = response.data.id;
-
-          console.log(response.data);
-
-          if (response.data.err) {
-            $scope.isLoggedIn = false;
-          } else {
-            $scope.isLoggedIn = true;
-          }
-        });
+        if (response.data.err) {
+          $scope.isLoggedIn = false;
+        } else {
+          $scope.isLoggedIn = true;
+        }
+      });
 
     });
+
+              // console.log('chatController ', message);
+
+    // $scope.messages.push(msg);
+
+    // $scope.messages.push({
+    //     user: $scope.user,
+    //     text: $scope.message
+    // });
+
+    // console.log('roomID on scope in chatController:', $scope.getRoomID);
+
+    // if (user.data.err) {
+    //     console.log('please sign in to access chat')
+    //     $state.go('sign-in');
+    // }
+
+    // $scope.user = user.data;
+    // console.log(user, );
+
+    // $scope.name = user.data.displayName;
+
+    // $scope.roomID = mainService.roomID;
+    // console.log('ROOM ID FROM SERVICE', $scope.roomID);
+
+    // $rootScope.$on("joined room", function(ev, roomID) {
+    //   // console.log('hit chat controller, joined room');
+    //   // console.log(arguments);
+    //     // $rootScope.roomID = roomID;
+    // });
+
+    // console.log($scope.roomID);
+
+    // $scope.clearInput = function() {
+    //   $scope.msg = '';
+    // }

@@ -1,5 +1,5 @@
 angular.module('bfing-app')
-  .controller('clientChatLandingCtrl', function($scope, mainService) {
+  .controller('clientChatLandingCtrl', function($scope, $state, mainService) {
 
     var showModal = false;
 
@@ -12,6 +12,11 @@ angular.module('bfing-app')
 
     $scope.$on('userAdded', function(ev, clientID) {
       // $scope.userQ.push(clientID);
+    });
+
+    $scope.$on("joined room", function(ev, roomID) {
+        $state.go('chat');
+        console.log('clientChatLandingCtrl',  'roomID:', roomID);
     });
 
     mainService.getUser().then(function(response) {

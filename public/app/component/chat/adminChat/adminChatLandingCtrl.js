@@ -1,18 +1,10 @@
 angular.module('bfing-app')
   .controller('adminChatLandingCtrl', function($scope, $state, mainService) {
 
-    // if (user.data.err) {
-    //     console.log('please sign in for admin access');
-    //     $state.go('sign-in');
-    // }
-    $scope.test = "test";
-
     $scope.getNextPatient = function(pcID) {
       console.log('hit adminChatLandingCtrl');
       $scope.$emit("next patient", pcID);
-    }();
-
-
+    };
 
     $scope.$on("joined room", function(ev, roomID) {
         $state.go('chat');
@@ -34,3 +26,8 @@ angular.module('bfing-app')
     });
 
   });
+
+  // if (user.data.err) {
+  //     console.log('please sign in for admin access');
+  //     $state.go('sign-in');
+  // }

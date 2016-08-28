@@ -113,10 +113,10 @@ var checkAuth = function (req, res, next) {
   }
 };
 
-app.get('/test', function(req, res, next) {
-  console.log('its redirecting');
-  next();
-});
+// app.get('/test', function(req, res, next) {
+//   console.log('its redirecting');
+//   next();
+// });
 
 app.get('/me', checkAuth, controller.getUser);
 
@@ -133,7 +133,7 @@ app.get('/logout', function(req, res){
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
-  console.log('hit');
+  // console.log('hit');
 });
 
 var waitingUsers = [
@@ -157,9 +157,9 @@ io.on('connection', function(socket){
     console.log(waitingUsers);
   });
 
-  socket.on('send:message', function(msg, id){
+  socket.on('send:message', function(msg, userID, roomID){
     console.log('message: ' + msg);
-    socket.broadcast.to($rootScope.roomID).emit('sendMessageBack', msg, id);
+    socket.to(roomID).emit('sendMessageBack', msg, userID);
   });
 
   socket.on("next patient", function(pcID) {
@@ -170,23 +170,20 @@ io.on('connection', function(socket){
       return;
     }
     var roomID = controller.getRoomId();
-    // console.log('uuid:', roomID);
-    // console.log(waitingUsers[0].clientID)
+
     var clientSocket = waitingUsers[0].socket;
     var pcSocket = socket;
 
-
     pcSocket.join(roomID);
     clientSocket.join(roomID);
-
-    // console.log("pc Socket", pcSocket.Adapter.rooms);
-    // console.log('client Socket', clientSocket.Adapter.rooms);
 
     var nextPatient = waitingUsers.shift();
 
     console.log(waitingUsers);
 
     socket.emit("joined room", roomID);
+
+    clientSocket.emit("joined room", roomID);
 
     console.log('PC:', pcID, '&', 'client:', nextPatient.clientID, 'joining room', roomID);
   });
@@ -196,3 +193,9 @@ io.on('connection', function(socket){
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
+
+// console.log('uuid:', roomID);
+// console.log(waitingUsers[0].clientID)
+
+// console.log("pc Socket", pcSocket.Adapter.rooms);
+// console.log('client Socket', clientSocket.Adapter.rooms);

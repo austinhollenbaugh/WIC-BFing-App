@@ -1,5 +1,5 @@
 angular.module('bfing-app')
-  .controller('publicController', ($scope, mainService, $rootScope, socket) => {
+  .controller('publicController', ($scope, mainService, $rootScope, socket, $window) => {
     $scope.welcome = 'mainController is working';
 
     $scope.isLoggedIn = true;
@@ -13,31 +13,25 @@ angular.module('bfing-app')
     });
 
     $scope.$on("next patient", function(ev, pcID) {
-      // console.log(ev);
       socket.emit("next patient", pcID);
-      console.log('hit publicController, ', 'pcID:', pcID);
     });
 
     socket.on("joined room", function(roomID) {
-      // $rootScope.$broadcast("joined room", roomID);
-      // console.log('publicCtrl', 'roomID:', roomID);
+
+      $scope.$broadcast("joined room", roomID);
+
       console.log('roomID in pubCtrl:', roomID);
-      mainService.set(roomID);
-
-      // mainService.getRoomID(roomID).then(function(response) {
-      //   $scope.roomID = response;
-      // })
-
+      $window.localStorage.roomID = roomID;
+      // mainService.set(roomID);
     });
 
-    $scope.$on("send:message", function(ev, message, id) {
-      socket.to($rootScope.roomID).emit("send:message", message);
-      console.log("service", message);
+    $scope.$on("send:message", function(ev, message, userID, roomID) {
+      socket.emit("send:message", message);
     });
 
-    socket.on('sendMessageBack', function(msg, id) {
-      $scope.to($rootScope.roomID).$broadcast("sendMessageBack", msg, id);
-      console.log("service return", msg);
+    socket.on('sendMessageBack', function(msg, userID) {
+      $scope.$broadcast("sendMessageBack", msg, userID);
+      console.log('public Ctrl, msg:', msg);
     });
 
     mainService.getUser().then(function(response) {
@@ -53,3 +47,5 @@ angular.module('bfing-app')
     });
 
   });
+
+        // console.log('publicCtrl', 'roomID:', roomID);
