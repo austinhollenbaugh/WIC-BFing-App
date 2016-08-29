@@ -148,7 +148,6 @@ io.on('connection', function(socket){
     console.log('user disconnected');
   });
 
-  //4b socket.on('registerUserId')
   socket.on('addUserToQ', function(clientID) {
     socket.emit('userAdded', clientID);
     var clientObj = {clientID: clientID,
@@ -158,12 +157,11 @@ io.on('connection', function(socket){
   });
 
   socket.on('send:message', function(msg, userID, roomID){
-    console.log('message: ' + msg);
-    socket.to(roomID).emit('sendMessageBack', msg, userID);
+    console.log('message: ' + msg, 'to room:', roomID);
+    io.to(roomID).emit('sendMessageBack', msg, userID);
   });
 
   socket.on("next patient", function(pcID) {
-    console.log('server hit');
     if (waitingUsers.length === 0) {
       socket.emit('empty queue');
       console.log('empty queue');

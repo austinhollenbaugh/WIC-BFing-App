@@ -1,7 +1,7 @@
 angular.module('bfing-app')
     .controller('chatController', function($scope, $state, mainService, $rootScope, user, $window) {
 
-      $scope.serviceRoomID = mainService.set();
+      // $scope.serviceRoomID = mainService.set();
 
       $scope.roomID = $window.localStorage.roomID;
 
@@ -9,8 +9,6 @@ angular.module('bfing-app')
 
       $scope.sendMessage = function(msg, userID, roomID) {
         $scope.$emit('send:message', msg, userID, roomID);
-
-          // $scope.message = '';
       };
 
       $scope.$on("sendMessageBack", function(ev, msg, userID) {
