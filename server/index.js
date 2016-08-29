@@ -146,7 +146,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('addUserToQ', function(clientID) {
-    socket.emit('userAdded', clientID);
+
     var clientObj = {clientID: clientID,
       socket: socket};
     waitingUsers.push(clientObj);
