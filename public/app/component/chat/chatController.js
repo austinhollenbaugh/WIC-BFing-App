@@ -11,9 +11,13 @@ angular.module('bfing-app')
         $scope.$emit('send:message', msg, userID, roomID);
       };
 
-      $scope.$on("sendMessageBack", function(ev, msg, userID) {
+      $scope.$on("sendMessageBack", function(ev, msg, userID, roomID) {
           $scope.messages.push(msg);
           $scope.$apply();
+          mainService.addMessage(msg, userID, roomID)
+          .then(function(response) {
+            console.log("db response in chat Controller:", response);
+          });
       });
 
       mainService.getUser().then(function(response) {

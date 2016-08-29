@@ -12,6 +12,10 @@ angular.module('bfing-app')
       $scope.$broadcast('userAdded', clientID);
     });
 
+    socket.on('waitingList:update', function(waitingUsers) {
+      $scope.$broadcast('waitingList:update', waitingUsers);
+    })
+
     $scope.$on("next patient", function(ev, pcID) {
       socket.emit("next patient", pcID);
     });
@@ -25,17 +29,12 @@ angular.module('bfing-app')
       // mainService.set(roomID);
     });
 
-    //person who sends gets this message below
     $scope.$on("send:message", function(ev, msg, userID, roomID) {
       socket.emit("send:message", msg, userID, roomID);
-      console.log('being sent TO server-- message:', msg, 'userID:', userID, 'roomID:', roomID);
     });
 
-    //person who receives gets this message below
-    //somehow both users are not having this event emitted to them, only the person receiving
-    socket.on('sendMessageBack', function(msg, userID) {
+    socket.on('sendMessageBack', function(msg, userID, roomID) {
       $scope.$broadcast("sendMessageBack", msg, userID);
-      console.log('message being sent BACK from server:', msg);
     });
 
     mainService.getUser().then(function(response) {

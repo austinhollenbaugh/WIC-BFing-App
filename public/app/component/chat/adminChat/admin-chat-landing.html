@@ -1,1 +1,8 @@
-<button type="button" name="button"  ng-click="getNextPatient(id)">Join room with new patient</button>
+<main class="admin-landing">
+
+  <div class="waitingList" ng-repeat="patient in patientList">
+    {{ patient }}
+  </div>
+
+  <button type="button" name="button"  ng-click="getNextPatient(id)">Join room with new patient</button>
+</main>

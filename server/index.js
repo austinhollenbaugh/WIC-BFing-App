@@ -95,8 +95,6 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 }));
 
 app.get('/auth/google', passport.authenticate('google',{scope: ['https://www.googleapis.com/auth/plus.me', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']}));
-// app.get('/auth/google', passport.authenticate('google',{scope: ['profile', 'email']}));
-
 
 app.get('/auth/google/callback',
     passport.authenticate( 'google', {
@@ -113,11 +111,6 @@ var checkAuth = function (req, res, next) {
   }
 };
 
-// app.get('/test', function(req, res, next) {
-//   console.log('its redirecting');
-//   next();
-// });
-
 app.get('/me', checkAuth, controller.getUser);
 
 app.get('/logout', function(req, res){
@@ -125,20 +118,23 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-// app.get('/sign-in', function (req, res) {
-//   res.redirect('/#/sign-in');
-// });
-
-// app.get('/')
-
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
   // console.log('hit');
 });
 
+app.post('/addMessage', function (msg, userID, roomID, next) {
+  db.messages.insert({message: msg, user_id: userID, room_id: roomID}, function(err, dbRes) {
+    console.log('add_message endpoint hit');
+    return next(null, dbRes);
+  });
+});
+
 var waitingUsers = [
   //{user socket: socket, clientId: clientID}
 ];
+
+var patientList = [];
 
 io.on('connection', function(socket){
   console.log("Socket Conn ID: ", socket.conn.id);
@@ -153,12 +149,20 @@ io.on('connection', function(socket){
     var clientObj = {clientID: clientID,
       socket: socket};
     waitingUsers.push(clientObj);
-    console.log(waitingUsers);
+
+    console.log('waitingUsers:', waitingUsers);
+
+    // for (var i = 0; i < waitingUsers.length; i++) {
+    //   patientList.push(waitingUsers[i].clientId]);
+    // }
+    // console.log('patient list:', patientList);
+
+    io.emit('waitingList:update', waitingUsers.clientId);
   });
 
   socket.on('send:message', function(msg, userID, roomID){
     console.log('message: ' + msg, 'to room:', roomID);
-    io.to(roomID).emit('sendMessageBack', msg, userID);
+    io.to(roomID).emit('sendMessageBack', msg, userID, roomID);
   });
 
   socket.on("next patient", function(pcID) {
@@ -197,3 +201,16 @@ http.listen(3000, function(){
 
 // console.log("pc Socket", pcSocket.Adapter.rooms);
 // console.log('client Socket', clientSocket.Adapter.rooms);
+
+// app.get('/test', function(req, res, next) {
+//   console.log('its redirecting');
+//   next();
+// });
+
+// app.get('/sign-in', function (req, res) {
+//   res.redirect('/#/sign-in');
+// });
+
+// app.get('/')
+
+// app.get('/auth/google', passport.authenticate('google',{scope: ['profile', 'email']}));
