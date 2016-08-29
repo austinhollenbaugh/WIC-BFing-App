@@ -8,6 +8,11 @@ angular.module('bfing-app')
       $scope.sendMessage = function(msg, userID, roomID) {
         $scope.$emit('send:message', msg, userID, roomID);
 
+        mainService.addMessage(msg, userID, roomID)
+        .then(function(response) {
+          console.log("db response in chat Controller:", response);
+        });
+
         var form = document.getElementById("chat-form");
         form.reset();
       };

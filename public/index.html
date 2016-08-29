@@ -39,7 +39,7 @@
             <div class="welcome dropdown" ng-show="isLoggedIn">
                 <!-- <p class='welcome-text'>Welcome, {{ user.displayName }}</p> -->
               <img  ng-src="https://graph.facebook.com/{{user.facebook_id}}/picture?type=large" ng-show="isFb" class="profile-pic dropbtn" />
-              <img ng-show="isGoogle" ng-src="{{user.photos[0]}}" class="profile-pic dropbtn" />
+              <img ng-show="isGoogle" ng-src="{{user.photo}}" class="profile-pic dropbtn" />
                 <div class="dropdown-content">
                   <a class="dd-menu-item" ui-sref="account">Account</a>
                   <a class="dd-menu-item" href="/logout" ng-click="isLoggedIn=false">Log-Out</a>

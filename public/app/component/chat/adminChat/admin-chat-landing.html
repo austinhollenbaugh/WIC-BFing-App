@@ -1,6 +1,6 @@
 <main class="admin-landing">
 
-  <div class="waiting-list" ng-repeat="patient in patientList">
+  <div class="waiting-list" ng-repeat="patient in patientList track by $index">
     {{ patient }}
   </div>
 

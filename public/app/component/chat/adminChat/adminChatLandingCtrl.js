@@ -2,9 +2,11 @@ angular.module('bfing-app')
   .controller('adminChatLandingCtrl', function($scope, $state, mainService) {
 
     $scope.$on("waitingList:update", function(ev, waitingUsers) {
+      // console.log($scope.patientList);
       $scope.patientList = waitingUsers;
       console.log('updated user list', $scope.patientList);
-    })
+      $scope.$apply();
+    });
 
     $scope.getNextPatient = function(pcID) {
       console.log('hit adminChatLandingCtrl');

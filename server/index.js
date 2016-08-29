@@ -63,11 +63,11 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.googleSecret,
     callbackURL: "http://localhost:3000/auth/google/callback"
   }, function(accessToken, refreshToken, profile, next) {
-    console.log(profile);
+    // console.log(profile);
     db.users.findOne({google_id: profile.id}, function(err, dbRes) {
       if (dbRes === undefined) {
         console.log("User not found. Creating...");
-        db.users.insert({name: profile.displayName, type: 'client', google_id: profile.id} , function(err, dbRes) {
+        db.users.insert({name: profile.displayName, type: 'client', google_id: profile.id, photo: profile.photos[0].value} , function(err, dbRes) {
           return next(null, dbRes);
         });
       } else {
@@ -124,12 +124,21 @@ app.get('/', function (req, res) {
   // console.log('hit');
 });
 
-// app.post('/addMessage', function (msg, userID, roomID, next) {
-//   db.messages.insert({message: msg, user_id: userID, room_id: roomID}, function(err, dbRes) {
-//     console.log('add_message endpoint hit');
-//     return next(null, dbRes);
-//   });
-// });
+app.post('/addMessage', function (req, res) {
+  var date = req.body.date_time;
+  var msg = req.body.message;
+  var userID = req.body.user_id;
+  var roomID = req.body.room_id;
+  console.log(date);
+  db.messages.insert({date_time: date, message: msg, user_id: userID, room_id: roomID}, function(err, dbRes) {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log('add_message endpoint hit');
+      res.send(dbRes);
+    }
+  });
+});
 
 var waitingUsers = [
   //{user socket: socket, clientId: clientID}
