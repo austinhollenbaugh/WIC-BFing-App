@@ -63,6 +63,7 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.googleSecret,
     callbackURL: "http://localhost:3000/auth/google/callback"
   }, function(accessToken, refreshToken, profile, next) {
+    console.log(profile);
     db.users.findOne({google_id: profile.id}, function(err, dbRes) {
       if (dbRes === undefined) {
         console.log("User not found. Creating...");
@@ -123,12 +124,12 @@ app.get('/', function (req, res) {
   // console.log('hit');
 });
 
-app.post('/addMessage', function (msg, userID, roomID, next) {
-  db.messages.insert({message: msg, user_id: userID, room_id: roomID}, function(err, dbRes) {
-    console.log('add_message endpoint hit');
-    return next(null, dbRes);
-  });
-});
+// app.post('/addMessage', function (msg, userID, roomID, next) {
+//   db.messages.insert({message: msg, user_id: userID, room_id: roomID}, function(err, dbRes) {
+//     console.log('add_message endpoint hit');
+//     return next(null, dbRes);
+//   });
+// });
 
 var waitingUsers = [
   //{user socket: socket, clientId: clientID}
@@ -152,12 +153,13 @@ io.on('connection', function(socket){
 
     console.log('waitingUsers:', waitingUsers);
 
-    // for (var i = 0; i < waitingUsers.length; i++) {
-    //   patientList.push(waitingUsers[i].clientId]);
-    // }
-    // console.log('patient list:', patientList);
+    for (var i = 0; i < waitingUsers.length; i++) {
+      patientList.push(waitingUsers[i].clientID);
+    }
 
-    io.emit('waitingList:update', waitingUsers.clientId);
+    console.log('patient list:', patientList);
+
+    io.emit('waitingList:update', patientList);
   });
 
   socket.on('send:message', function(msg, userID, roomID){

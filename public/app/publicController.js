@@ -1,8 +1,5 @@
 angular.module('bfing-app')
-  .controller('publicController', ($scope, mainService, $rootScope, socket, $window) => {
-    $scope.welcome = 'mainController is working';
-
-    $scope.isLoggedIn = true;
+  .controller('publicController', ($scope, mainService, socket, $state, $window) => {
 
     $scope.$on("addUserToQ", function(ev, clientID) {
       socket.emit("addUserToQ", clientID);
@@ -14,7 +11,7 @@ angular.module('bfing-app')
 
     socket.on('waitingList:update', function(waitingUsers) {
       $scope.$broadcast('waitingList:update', waitingUsers);
-    })
+    });
 
     $scope.$on("next patient", function(ev, pcID) {
       socket.emit("next patient", pcID);
@@ -37,18 +34,38 @@ angular.module('bfing-app')
       $scope.$broadcast("sendMessageBack", msg, userID);
     });
 
-    mainService.getUser().then(function(response) {
-      $scope.user = response.data.displayName;
+    $scope.chatRedirect = function() {
+     if ($scope.user.type === 'PC') {
+      $state.go('admin-chat-landing');
+      console.log('welcome, admin');
+    } else if ($scope.user.type === 'client'){
+      $state.go('client-chat-landing');
+      console.log('welcome, client');
+    } else {
+      console.log('ERRORS:', $scope.user.type);
+    }
 
-      console.log(response.data);
+    };
+
+    mainService.getUser().then(function(response) {
+      $scope.user = response.data;
+      console.log($scope.user);
 
       if (response.data.err) {
         $scope.isLoggedIn = false;
       } else {
         $scope.isLoggedIn = true;
+        if ($scope.user.google_id) {
+          var isGoogle = true;
+          console.log('google');
+        } else if ($scope.user.facebook_id) {
+          var isFb = true;
+          console.log('fb');
+        }
       }
     });
 
   });
+
 
         // console.log('publicCtrl', 'roomID:', roomID);

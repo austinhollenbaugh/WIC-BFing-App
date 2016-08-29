@@ -15,12 +15,12 @@ angular.module('bfing-app')
       });
     };
 
-    this.addMessage = function() {
-      return $http({
-        method: 'POST',
-        url: '/addMessage'
-      })
-    }
+    // this.addMessage = function() {
+    //   return $http({
+    //     method: 'POST',
+    //     url: '/addMessage'
+    //   })
+    // }
 
   });
 

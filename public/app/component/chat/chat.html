@@ -4,8 +4,8 @@
 
   <div class="messaging-container">
 
-    <form>
-      <input class="chat-input" id="m" autocomplete="off" ng-model="msg" clear-input/><button class="sendbtn" type="button" ng-click="sendMessage(msg, id, roomID)">Send</button>
+    <form id="chat-form" ng-submit="sendMessage(msg, id, roomID)">
+      <input class="chat-input" id="m" autocomplete="off" ng-model="msg" clear-input/><button class="sendbtn" type="button"  ng-click="sendMessage(msg, id, roomID)">Send</button>
 
     </form>
 

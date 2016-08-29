@@ -1,23 +1,24 @@
 angular.module('bfing-app')
     .controller('chatController', function($scope, $state, mainService, $rootScope, user, $window) {
 
-      // $scope.serviceRoomID = mainService.set();
-
       $scope.roomID = $window.localStorage.roomID;
 
       $scope.messages = [];
 
       $scope.sendMessage = function(msg, userID, roomID) {
         $scope.$emit('send:message', msg, userID, roomID);
+
+        var form = document.getElementById("chat-form");
+        form.reset();
       };
 
       $scope.$on("sendMessageBack", function(ev, msg, userID, roomID) {
           $scope.messages.push(msg);
           $scope.$apply();
-          mainService.addMessage(msg, userID, roomID)
-          .then(function(response) {
-            console.log("db response in chat Controller:", response);
-          });
+          // mainService.addMessage(msg, userID, roomID)
+          // .then(function(response) {
+          //   console.log("db response in chat Controller:", response);
+          // });
       });
 
       mainService.getUser().then(function(response) {

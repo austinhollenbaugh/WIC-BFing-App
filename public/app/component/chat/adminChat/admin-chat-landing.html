@@ -1,8 +1,8 @@
 <main class="admin-landing">
 
-  <div class="waitingList" ng-repeat="patient in patientList">
+  <div class="waiting-list" ng-repeat="patient in patientList">
     {{ patient }}
   </div>
 
-  <button type="button" name="button"  ng-click="getNextPatient(id)">Join room with new patient</button>
+  <button type="button" class="next-patient-button" name="button"  ng-click="getNextPatient(id)">Get Next Client</button>
 </main>

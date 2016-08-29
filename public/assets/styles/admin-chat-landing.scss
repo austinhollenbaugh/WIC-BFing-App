@@ -1,0 +1,19 @@
+.admin-landing {
+  height: 100%;
+  width: 100%;
+}
+
+.waiting-list {
+  height: 50%;
+  width: 50%;
+  z-index: 10;
+  text-align: center;
+  overflow: scroll;
+}
+
+.next-patient-button {
+  display: block;
+  margin: auto;
+  padding: 15px;
+  font-size: 1.2rem;
+}

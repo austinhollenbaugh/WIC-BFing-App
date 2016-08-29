@@ -3,7 +3,7 @@ angular.module('bfing-app')
 
     $scope.$on("waitingList:update", function(ev, waitingUsers) {
       $scope.patientList = waitingUsers;
-      console.log('updated user list');
+      console.log('updated user list', $scope.patientList);
     })
 
     $scope.getNextPatient = function(pcID) {
