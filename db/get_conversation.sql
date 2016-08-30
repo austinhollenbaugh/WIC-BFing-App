@@ -1,4 +1,3 @@
-SELECT * FROM conversations
-JOIN messages
-ON conversations.room_id = messages.room_id
-WHERE messages.user_id = $1;
+select * from messages
+where room_id = $1
+ORDER BY date_time;

@@ -4,7 +4,7 @@ angular.module('bfing-app')
     var showModal = false;
 
     $scope.addUserToQ = function(clientID) {
-      console.log('user added');
+      // console.log('user added');
       showModal = true;
       $scope.$emit('addUserToQ', clientID);
 

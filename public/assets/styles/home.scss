@@ -9,11 +9,17 @@
 
 .description {
   font-size: 20px;
+  // margin-left: 15%;
+  // margin-right: 15%;
+  text-align: justify;
 }
 
 .wic-provides {
   font-size: 20px;
   line-height: 150%;
+  // margin-left: 15%;
+  // margin-right: 15%;
+  text-align: justify;
 }
 
 .list-title {
@@ -23,18 +29,19 @@
 .warmline {
   font-weight: 800;
   font-size: 30px;
+  // text-align:
 }
 
-@media only screen and (max-device-width: 768px) {
-  .title-text {
-    font-size: 4rem;
-    text-align: left;
-  }
-  .wic-provides {
-    font-size: 3rem;
-    text-align: left;
-  }
-  .warmline {
-    display: none;
-  }
-}
+// @media only screen and (max-device-width: 768px) {
+//   .title-text {
+//     font-size: 4rem;
+//     text-align: left;
+//   }
+//   .wic-provides {
+//     font-size: 3rem;
+//     text-align: left;
+//   }
+//   .warmline {
+//     display: none;
+//   }
+// }

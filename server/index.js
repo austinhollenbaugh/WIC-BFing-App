@@ -207,21 +207,60 @@ http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 
-// console.log('uuid:', roomID);
-// console.log(waitingUsers[0].clientID)
+//ATTEMPT AT NOT LETTING USERS ADD THEMSELVES MORE THAN ONCE
 
-// console.log("pc Socket", pcSocket.Adapter.rooms);
-// console.log('client Socket', clientSocket.Adapter.rooms);
-
-// app.get('/test', function(req, res, next) {
-//   console.log('its redirecting');
-//   next();
-// });
-
-// app.get('/sign-in', function (req, res) {
-//   res.redirect('/#/sign-in');
-// });
-
-// app.get('/')
-
-// app.get('/auth/google', passport.authenticate('google',{scope: ['profile', 'email']}));
+// io.on('connection', function(socket) {
+//     console.log("Socket Conn ID: ", socket.conn.id);
+//     console.log('a user connected');
+//     socket.on('disconnect', function() {
+//         // socket.leave('some room');
+//         console.log('user disconnected');
+//     });
+//
+//     socket.on('addUserToQ', function(clientID) {
+//
+//             // controller.addUserToQ(socket, clientID);
+//           var clientObj = {
+//               clientID: clientID,
+//               socket: socket
+//           };
+//           console.log('before check:', waitingUsers);
+//           var alreadyAdded = false;
+//
+//           function checkIfExists() {
+//               console.log('inside function');
+//               if (waitingUsers.length === 0) {
+//                 waitingUsers.push(clientObj);
+//                 patientList.push(clientObj.clientID);
+//                 console.log('user pushed', waitingUsers);
+//               } else {
+//                 for (var i = 0; i < waitingUsers.length; i++) {
+//                     console.log('loop', i);
+//                     if (waitingUsers[i].clientID === clientObj.clientID) {
+//                         console.log('user already added');
+//                         alreadyAdded = true;
+//                         return alreadyAdded;
+//                     }
+//                 }
+//                 if (!alreadyAdded) {
+//                     waitingUsers.push(clientObj);
+//                     patientList.push(clientObj.clientID);
+//                     console.log('user pushed', waitingUsers);
+//                 } else {
+//                     console.log('not added because already existing');
+//                 }
+//               }
+//
+//           };
+//           console.log('finished for loop');
+//
+//           checkIfExists();
+//
+//           console.log('after check:', waitingUsers);
+//           console.log('waitingUsers:', waitingUsers);
+//           console.log('patient list:', patientList);
+//       }
+//
+//
+//         io.emit('waitingList:update', patientList);
+//     });

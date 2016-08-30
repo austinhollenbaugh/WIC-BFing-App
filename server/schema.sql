@@ -15,9 +15,9 @@ CREATE TABLE messages (
   room_id varchar(50)
 );
 
-CREATE TABLE conversations (
-  id serial PRIMARY KEY not null,
-  client_id integer,
-  admin_id integer,
-  room_id varchar(50) references messages(room_id)
-);
+-- CREATE TABLE conversations (
+--   id serial PRIMARY KEY not null,
+--   client_id integer,
+--   admin_id integer,
+--   room_id varchar(50) references messages(room_id)
+-- );
