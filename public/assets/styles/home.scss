@@ -1,17 +1,26 @@
+.test {
+  display: flex;
+  justify-content: center;
+}
+
 .home-container {
-  text-align: center;
+  // text-align: center;
+  height: 500px;
+  width: 500px;
+  margin: 0;
 }
 
 .title-text {
   font-weight: 800;
   font-size: 30px;
+  text-align: center;
 }
 
 .description {
   font-size: 20px;
   // margin-left: 15%;
   // margin-right: 15%;
-  text-align: justify;
+  // text-align: justify;
 }
 
 .wic-provides {
@@ -19,7 +28,7 @@
   line-height: 150%;
   // margin-left: 15%;
   // margin-right: 15%;
-  text-align: justify;
+  // text-align: justify;
 }
 
 .list-title {
@@ -28,7 +37,7 @@
 
 .warmline {
   font-weight: 800;
-  font-size: 30px;
+  font-size: 15px;
   // text-align:
 }
 
