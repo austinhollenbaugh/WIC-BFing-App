@@ -14,7 +14,7 @@ var io = require('socket.io')(http);
 var keys = require('./keys');
 var controller = require('./controllers/serverController.js');
 require('./controllers/socketsController.js');
-var constring = 'postgres://austinhollenbaugh@localhost/bfing_app';
+var constring = 'postgres://postgres@localhost/bfing_app';
 
 
 
