@@ -1,0 +1,60 @@
+<main class="client-chat-landing">
+  <div class="chat-desc">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non rhoncus arcu. Donec vulputate felis dui. Aliquam erat volutpat. Vestibulum faucibus mattis mi at commodo. Aliquam ornare ligula in commodo auctor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi a suscipit odio. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+    </p><br>
+
+    <p>
+      Vivamus at felis et urna fringilla vulputate ut at enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla fermentum neque eget facilisis molestie. Suspendisse interdum dictum dictum. Maecenas condimentum non enim a gravida. In non efficitur eros. Duis varius lorem in feugiat condimentum.
+    </p>
+  </div>
+
+  <!-- <link rel="modal:open" type="text/css" href="">
+    <button type="button" class="client-chat-btn" id="myBtn" data-toggle="modal" data-target="#myModal" ng-click="addUserToQ(id)">Chat with a Peer Counselor</button>
+  </link> -->
+
+  <!-- Trigger/Open The Modal -->
+<button id="myBtn" class="client-chat-btn" ng-click="addUserToQ(id)">Chat with a Peer Counselor</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <!-- <p>You are number BLANK in line.</p><br> -->
+    <p>A peer counselor will be with you soon.</p><br>
+    <p class="modal-note">
+      Note: this may take a moment. <br> You can also call us, at 801-331-5988.
+    </p><br>
+    <span class='close'><button type="button" name="button" class="nevermind-btn">Nevermind</button></span>
+  </div>
+</div>
+
+<script type="text/javascript">
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (nevermind), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
+</script>
+</main>

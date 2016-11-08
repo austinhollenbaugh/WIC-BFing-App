@@ -45,6 +45,25 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+.admin-landing {
+  height: 100%;
+  width: 100%; }
+
+.modal-note {
+  font-size: 15px; }
+
+.waiting-list {
+  width: 50%;
+  z-index: 10;
+  text-align: center;
+  overflow: scroll; }
+
+.next-patient-button {
+  display: block;
+  margin: auto;
+  padding: 15px;
+  font-size: 1.2rem; }
+
 * {
   margin: 0;
   padding: 0;
@@ -65,11 +84,16 @@ body {
   padding: 3px;
   width: 100%; }
 
+.messages {
+  font-size: 20px;
+  margin: 10px; }
+
 .chat-input {
   border: 0;
   padding: 10px;
   width: 90%;
-  margin-right: .5%; }
+  margin-right: .5%;
+  font-size: 15px; }
 
 .sendbtn {
   width: 9%;
@@ -88,12 +112,88 @@ body {
 #messages li:nth-child(odd) {
   background: #eee; }
 
-.home-container {
+.chat-desc {
+  font-size: 20px; }
+
+.client-chat-btn {
+  padding: 10px;
+  display: block;
+  margin: 2rem auto;
+  font-size: 20px;
+  cursor: pointer; }
+
+.modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 50px; }
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */ }
+
+/* Modal Content */
+.modal-content {
+  background-color: #FCFCFC;
+  margin: auto;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5rem;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 500px;
   text-align: center; }
+
+.nevermind-btn {
+  padding: 10px;
+  font-size: 10px;
+  border-radius: 3px;
+  border: none; }
+
+.modal-instr {
+  padding: 10px; }
+
+/* The Close Button */
+.close {
+  color: #FCFCFC;
+  font-size: 28px; }
+
+.close:hover,
+.close:focus {
+  text-decoration: none;
+  cursor: pointer; }
+
+.test {
+  display: flex;
+  justify-content: center; }
+
+.home-container {
+  height: 500px;
+  width: 500px;
+  margin: 0; }
 
 .title-text {
   font-weight: 800;
-  font-size: 30px; }
+  font-size: 30px;
+  text-align: center; }
 
 .description {
   font-size: 20px; }
@@ -107,17 +207,7 @@ body {
 
 .warmline {
   font-weight: 800;
-  font-size: 30px; }
-
-@media only screen and (max-device-width: 768px) {
-  .title-text {
-    font-size: 4rem;
-    text-align: left; }
-  .wic-provides {
-    font-size: 3rem;
-    text-align: left; }
-  .warmline {
-    display: none; } }
+  font-size: 15px; }
 
 .main-header {
   background-color: #6452BF;
@@ -127,9 +217,9 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  -moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
-  -webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
-  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6); }
+  -moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.2);
+  -webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.2);
+  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.2); }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
@@ -156,7 +246,7 @@ body {
 .right-menu {
   position: absolute;
   right: 1.5rem;
-  top: 1.1rem;
+  top: .5rem;
   z-index: 5;
   color: #FEFEFA; }
 
@@ -174,7 +264,7 @@ body {
   color: #FEFEFA; }
 
 html {
-  background-color: #43377F; }
+  background-color: #DCDCDC; }
 
 .main-container {
   display: flex;
@@ -183,15 +273,15 @@ html {
   height: 87vh; }
 
 .views {
-  width: 80vw;
+  width: 800px;
   height: 80vh;
   border-radius: 5px;
-  background-color: #FEFEFA;
-  padding: 20px;
+  background-color: white;
+  padding: 50px;
   font-family: 'Karla', sans-serif;
-  -moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.3);
-  -webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.3);
-  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.3); }
+  -moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.1);
+  -webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.1);
+  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.1); }
 
 .footer {
   height: 5vh;
@@ -201,9 +291,9 @@ html {
   bottom: 0;
   left: 0;
   text-align: center;
-  -moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
-  -webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
-  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6); }
+  -moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.3);
+  -webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.3);
+  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.3); }
 
 .warmline-mobile {
   display: none; }
@@ -251,41 +341,42 @@ html {
   background-color: #3e8e41; }
 
 /*MOBILE RESPONSIVE*/
-@media only screen and (max-device-width: 768px) {
-  .main-container {
-    background-color: #FEFEFA; }
-  .main-header {
-    height: 10vh;
-    justify-content: center; }
-  .ham {
-    cursor: pointer; }
-  .hamburger-menu {
-    width: 35px;
-    height: 5px;
-    background-color: #FEFEFA;
-    margin: 6px 0; }
-  .logo {
-    height: 10vh; }
-  .non-logo {
-    display: none; }
-  .profile-pic {
-    height: 7vh; }
-  .sign-in {
-    display: none; }
-  .views {
-    height: 85vh;
-    width: 98vw;
-    border-radius: 0; }
-  .footer {
-    height: 7vh;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-  .warmline-mobile {
-    display: block;
-    color: white;
-    font-size: 2.5rem;
-    font-family: 'Karla', sans-serif; } }
+
+.resources-title {
+  font-size: 30px; }
+
+.links {
+  font-size: 20px; }
+
+.3rd-party-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.fb {
+  background-color: #3B5998;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto; }
+
+.link {
+  text-decoration: none;
+  color: #FEFEFA;
+  font-family: 'Karla', sans-serif;
+  font-size: 20px; }
+
+.google {
+  background-color: #CF4332;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto; }
 
 .tips-list {
   width: 100%;

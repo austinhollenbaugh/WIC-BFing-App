@@ -37,3 +37,26 @@ module.exports = {
     return Math.uuid();
     }
 };
+
+// joinChat: function(clientID) {
+//   waitingUsers.push({clientID: socket.conn.id});
+// },
+// addUserToQ: function(socket, clientID) {
+//   var clientObj = {clientID: clientID,
+//     socket: socket};
+//
+//   function checkIfExists () {
+//     for (var i = 0; i < waitingUsers.length; i++) {
+//       if (waitingUsers[i].clientID === clientObj.clientID) {
+//         console.log('user already added');
+//         return;
+//       }
+//     }
+//   }
+//
+//   waitingUsers.push(clientObj);
+//   patientList.push(clientObj.clientID);
+//
+//   console.log('waitingUsers:', waitingUsers);
+//   console.log('patient list:', patientList);
+// },

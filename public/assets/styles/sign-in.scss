@@ -1,0 +1,33 @@
+.3rd-party-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fb {
+  background-color: #3B5998;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+}
+
+.link {
+  text-decoration: none;
+  color: #FEFEFA;
+  font-family: 'Karla', sans-serif;
+  font-size: 20px;
+}
+
+.google {
+  background-color: #CF4332;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+}

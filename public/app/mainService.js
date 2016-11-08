@@ -14,12 +14,25 @@ angular.module('bfing-app')
         url: '/me'
       });
     };
-    // 
-    // this.isLoggedIn = function() {
-    //   return {
-    //     isLogged: false,
-    //     username: ''
-    //   };
-    // };
+
+    this.addMessage = function(msg, userID, roomID) {
+      return $http({
+        method: 'POST',
+        url: '/addMessage',
+        data: {date_time: new Date(), message: msg, user_id: userID, room_id: roomID}
+      })
+    }
 
   });
+
+  // this.set = function(data) {
+  //   this.data = data;
+  //   console.log('data in service:', data);
+  // };
+  //
+  // this.isLoggedIn = function() {
+  //   return {
+  //     isLogged: false,
+  //     username: ''
+  //   };
+  // };
